@@ -1,0 +1,285 @@
+
+version: 2
+
+sources:
+  - name: salesforce_raw
+    database: ANALYTICS_PROD_INGEST
+    schema: SALESFORCE_RAW
+    description: >
+      Raw Salesforce CRM data ingested into Snowflake
+      through Stitch. This public project uses
+      synthetic source definitions.
+
+    tables:
+      - name: account
+        identifier: ACCOUNT
+        description: "Salesforce customer account information."
+        columns:
+          - name: ID
+            description: "Unique identifier for each account."
+            data_tests:
+              - unique
+              - not_null
+
+          - name: NAME
+            description: "Name of the customer account."
+            data_tests:
+              - not_null
+
+          - name: ACCOUNT_NUMBER
+            description: "Business account reference number."
+
+          - name: TYPE
+            description: "Classification of the account."
+
+          - name: INDUSTRY
+            description: "Industry associated with the account."
+
+          - name: DESCRIPTION
+            description: "Description of the account."
+
+          - name: PARENT_ID
+            description: "Parent account identifier for account hierarchies."
+
+          - name: OWNER_ID
+            description: "Salesforce user responsible for the account."
+
+          - name: PHONE
+            description: "Primary business phone number."
+
+          - name: WEBSITE
+            description: "Company website."
+
+          - name: BILLING_STREET
+            description: "Billing street address."
+
+          - name: BILLING_CITY
+            description: "Billing city."
+
+          - name: BILLING_STATE
+            description: "Billing state or province."
+
+          - name: BILLING_POSTAL_CODE
+            description: "Billing postal code."
+
+          - name: BILLING_COUNTRY
+            description: "Billing country."
+
+          - name: SHIPPING_CITY
+            description: "Shipping city."
+
+          - name: SHIPPING_STATE
+            description: "Shipping state or province."
+
+          - name: SHIPPING_COUNTRY
+            description: "Shipping country."
+
+          - name: ANNUAL_REVENUE
+            description: "Reported annual revenue of the account."
+
+          - name: NUMBER_OF_EMPLOYEES
+            description: "Reported number of employees."
+
+          - name: RATING
+            description: "Account rating classification."
+
+          - name: OWNERSHIP
+            description: "Ownership classification."
+
+          - name: CREATED_DATE
+            description: "Date and time the account was created."
+
+          - name: CREATED_BY_ID
+            description: "User who created the account."
+
+          - name: LAST_MODIFIED_DATE
+            description: "Date and time the account was last modified."
+
+          - name: LAST_MODIFIED_BY_ID
+            description: "User who last modified the account."
+
+          - name: IS_DELETED
+            description: "Indicates whether the record was deleted."
+
+      - name: contact
+        identifier: CONTACT
+        description: "Salesforce contacts associated with customer accounts."
+        columns:
+          - name: ID
+            description: "Unique identifier for each contact."
+            data_tests:
+              - unique
+              - not_null
+
+          - name: ACCOUNT_ID
+            description: "Account associated with the contact."
+
+          - name: FIRST_NAME
+            description: "Contact first name."
+
+          - name: LAST_NAME
+            description: "Contact last name."
+
+          - name: EMAIL
+            description: "Contact email address."
+
+          - name: PHONE
+            description: "Contact phone number."
+
+          - name: TITLE
+            description: "Contact job title."
+
+          - name: DEPARTMENT
+            description: "Department associated with the contact."
+
+          - name: OWNER_ID
+            description: "Salesforce user responsible for the contact."
+
+          - name: CREATED_DATE
+            description: "Contact creation timestamp."
+
+          - name: LAST_MODIFIED_DATE
+            description: "Last modification timestamp."
+
+          - name: IS_DELETED
+            description: "Indicates whether the contact was deleted."
+
+      - name: opportunity
+        identifier: OPPORTUNITY
+        description: "Sales opportunities and pipeline information."
+        columns:
+          - name: ID
+            description: "Unique identifier for each opportunity."
+            data_tests:
+              - unique
+              - not_null
+
+          - name: ACCOUNT_ID
+            description: "Account associated with the opportunity."
+
+          - name: NAME
+            description: "Opportunity name."
+            data_tests:
+              - not_null
+
+          - name: OWNER_ID
+            description: "Salesforce user responsible for the opportunity."
+
+          - name: STAGE_NAME
+            description: "Current stage in the sales pipeline."
+
+          - name: TYPE
+            description: "Opportunity classification."
+
+          - name: AMOUNT
+            description: "Estimated monetary value of the opportunity."
+
+          - name: PROBABILITY
+            description: "Estimated probability of closing."
+
+          - name: EXPECTED_REVENUE
+            description: "Probability-weighted opportunity revenue."
+
+          - name: CLOSE_DATE
+            description: "Expected or actual opportunity closing date."
+
+          - name: IS_CLOSED
+            description: "Indicates whether the opportunity is closed."
+
+          - name: IS_WON
+            description: "Indicates whether the opportunity was won."
+
+          - name: CREATED_DATE
+            description: "Opportunity creation timestamp."
+
+          - name: LAST_MODIFIED_DATE
+            description: "Last modification timestamp."
+
+          - name: IS_DELETED
+            description: "Indicates whether the opportunity was deleted."
+
+      - name: user
+        identifier: USER
+        description: "Salesforce users and account ownership information."
+        columns:
+          - name: ID
+            description: "Unique identifier for each Salesforce user."
+            data_tests:
+              - unique
+              - not_null
+
+          - name: FIRST_NAME
+            description: "User first name."
+
+          - name: LAST_NAME
+            description: "User last name."
+
+          - name: EMAIL
+            description: "User email address."
+
+          - name: USERNAME
+            description: "Salesforce username."
+
+          - name: TITLE
+            description: "User job title."
+
+          - name: DEPARTMENT
+            description: "User department."
+
+          - name: MANAGER_ID
+            description: "Identifier of the user's manager."
+
+          - name: IS_ACTIVE
+            description: "Indicates whether the user is active."
+
+          - name: CREATED_DATE
+            description: "User creation timestamp."
+
+          - name: LAST_MODIFIED_DATE
+            description: "Last modification timestamp."
+
+      - name: contract
+        identifier: CONTRACT
+        description: "Customer contracts and agreement information."
+        columns:
+          - name: ID
+            description: "Unique identifier for each contract."
+            data_tests:
+              - unique
+              - not_null
+
+          - name: ACCOUNT_ID
+            description: "Customer account associated with the contract."
+
+          - name: CONTRACT_NUMBER
+            description: "Contract reference number."
+
+          - name: OWNER_ID
+            description: "User responsible for the contract."
+
+          - name: STATUS
+            description: "Current contract status."
+
+          - name: START_DATE
+            description: "Contract effective start date."
+
+          - name: END_DATE
+            description: "Contract expiration date."
+
+          - name: CONTRACT_TERM
+            description: "Duration of the contract in months."
+
+          - name: BILLING_FREQUENCY
+            description: "Illustrative contract billing frequency."
+
+          - name: CONTRACT_VALUE
+            description: "Illustrative total contract value."
+
+          - name: CREATED_DATE
+            description: "Contract creation timestamp."
+
+          - name: LAST_MODIFIED_DATE
+            description: "Last modification timestamp."
+
+          - name: IS_DELETED
+            description: "Indicates whether the contract was deleted."
