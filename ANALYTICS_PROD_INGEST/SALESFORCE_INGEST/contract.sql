@@ -1,0 +1,17 @@
+
+SELECT
+      c.ID AS CONTRACT_ID
+    , c.ACCOUNT_ID
+    , NULLIF(TRIM(c.CONTRACT_NUMBER), '') AS CONTRACT_NUMBER
+    , c.OWNER_ID
+    , NULLIF(TRIM(c.STATUS), '') AS CONTRACT_STATUS
+    , c.START_DATE
+    , c.END_DATE
+    , c.CONTRACT_TERM
+    , NULLIF(TRIM(c.BILLING_FREQUENCY), '') AS BILLING_FREQUENCY
+    , c.CONTRACT_VALUE
+    , c.CREATED_DATE
+    , c.LAST_MODIFIED_DATE
+    , c.IS_DELETED
+FROM {{ source('salesforce_raw', 'contract') }} AS c
+  
