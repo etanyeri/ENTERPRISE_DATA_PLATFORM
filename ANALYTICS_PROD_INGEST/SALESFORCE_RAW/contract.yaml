@@ -1,0 +1,17 @@
+# Raw Salesforce data ingested into Snowflake via Stitch.
+# Illustrative field inventory — no live integration.
+
+CONTRACT:
+  - ID
+  - ACCOUNT_ID
+  - CONTRACT_NUMBER
+  - OWNER_ID
+  - STATUS
+  - START_DATE
+  - END_DATE
+  - CONTRACT_TERM
+  - BILLING_FREQUENCY
+  - CONTRACT_VALUE
+  - CREATED_DATE
+  - LAST_MODIFIED_DATE
+  - IS_DELETED
