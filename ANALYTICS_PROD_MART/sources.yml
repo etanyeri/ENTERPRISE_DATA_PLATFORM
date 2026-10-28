@@ -1,0 +1,117 @@
+
+version: 2
+
+sources:
+  - name: salesforce_ingest
+    database: ANALYTICS_PROD_INGEST
+    schema: SALESFORCE_INGEST
+    description: "Cleaned Salesforce CRM data ingested from Stitch and standardized by dbt."
+
+    tables:
+      - name: account
+        identifier: ACCOUNT
+        description: "Cleaned Salesforce account records used for customer transformations."
+        columns:
+          - name: ACCOUNT_ID
+            description: "Unique Salesforce account identifier."
+            data_tests:
+              - not_null
+
+          - name: ACCOUNT_NAME
+            description: "Customer account name."
+
+          - name: PARENT_ID
+            description: "Parent Salesforce account identifier."
+
+          - name: OWNER_ID
+            description: "Salesforce user responsible for the account."
+
+          - name: BILLING_COUNTRY
+            description: "Account billing country."
+
+          - name: PHONE
+            description: "Account phone number."
+
+          - name: LAST_MODIFIED_DATE
+            description: "Timestamp of the latest account update."
+
+          - name: IS_DELETED
+            description: "Salesforce deletion indicator."
+
+      - name: contact
+        identifier: CONTACT
+        description: "Cleaned Salesforce contact records."
+        columns:
+          - name: CONTACT_ID
+            description: "Unique Salesforce contact identifier."
+            data_tests:
+              - not_null
+
+          - name: ACCOUNT_ID
+            description: "Related Salesforce account identifier."
+
+          - name: EMAIL
+            description: "Contact email address."
+
+      - name: opportunity
+        identifier: OPPORTUNITY
+        description: "Cleaned Salesforce opportunity and sales pipeline records."
+        columns:
+          - name: OPPORTUNITY_ID
+            description: "Unique opportunity identifier."
+            data_tests:
+              - not_null
+
+          - name: ACCOUNT_ID
+            description: "Related Salesforce account identifier."
+
+          - name: STAGE_NAME
+            description: "Current sales opportunity stage."
+
+          - name: AMOUNT
+            description: "Opportunity amount."
+
+          - name: CLOSE_DATE
+            description: "Expected or actual close date."
+
+      - name: user
+        identifier: USER
+        description: "Cleaned Salesforce user and account ownership records."
+        columns:
+          - name: USER_ID
+            description: "Unique Salesforce user identifier."
+            data_tests:
+              - not_null
+
+          - name: FIRST_NAME
+            description: "Salesforce user first name."
+
+          - name: LAST_NAME
+            description: "Salesforce user last name."
+
+          - name: EMAIL
+            description: "Salesforce user email address."
+
+      - name: contract
+        identifier: CONTRACT
+        description: "Cleaned Salesforce customer contract records."
+        columns:
+          - name: CONTRACT_ID
+            description: "Unique Salesforce contract identifier."
+            data_tests:
+              - not_null
+
+          - name: ACCOUNT_ID
+            description: "Related Salesforce account identifier."
+
+          - name: STATUS
+            description: "Current contract status."
+
+          - name: START_DATE
+            description: "Contract effective start date."
+
+          - name: END_DATE
+            description: "Contract expiration date."
+
+          - name: CONTRACT_VALUE
+            description: "Illustrative total contract value."
