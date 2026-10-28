@@ -1,0 +1,16 @@
+
+SELECT
+      c.ID AS CONTACT_ID
+    , c.ACCOUNT_ID
+    , NULLIF(TRIM(c.FIRST_NAME), '') AS FIRST_NAME
+    , NULLIF(TRIM(c.LAST_NAME), '') AS LAST_NAME
+    , NULLIF(TRIM(c.EMAIL), '') AS EMAIL
+    , NULLIF(TRIM(c.PHONE), '') AS PHONE
+    , NULLIF(TRIM(c.TITLE), '') AS TITLE
+    , NULLIF(TRIM(c.DEPARTMENT), '') AS DEPARTMENT
+    , c.OWNER_ID
+    , c.CREATED_DATE
+    , c.LAST_MODIFIED_DATE
+    , c.IS_DELETED
+FROM {{ source('salesforce_raw', 'contact') }} AS c
+  
