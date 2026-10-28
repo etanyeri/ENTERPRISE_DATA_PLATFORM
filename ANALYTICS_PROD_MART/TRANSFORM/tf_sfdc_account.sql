@@ -1,6 +1,3 @@
-
-{{ config(materialized='table', alias='TF_SFDC_ACCOUNT') }}
-
 SELECT
       SFA.ACCOUNT_ID AS SFDC_ACCOUNT_ID
     , SFA.ACCOUNT_NAME AS SFDC_ACCOUNT_NAME
