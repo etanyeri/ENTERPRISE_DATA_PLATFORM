@@ -1,0 +1,19 @@
+# Raw Salesforce data ingested into Snowflake via Stitch.
+# Illustrative field inventory — no live integration.
+
+OPPORTUNITY:
+  - ID
+  - ACCOUNT_ID
+  - NAME
+  - OWNER_ID
+  - STAGE_NAME
+  - TYPE
+  - AMOUNT
+  - PROBABILITY
+  - EXPECTED_REVENUE
+  - CLOSE_DATE
+  - IS_CLOSED
+  - IS_WON
+  - CREATED_DATE
+  - LAST_MODIFIED_DATE
+  - IS_DELETED
