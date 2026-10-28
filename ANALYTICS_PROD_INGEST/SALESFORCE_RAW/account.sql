@@ -1,1 +1,37 @@
 
+# Salesforce Account - RAW Layer
+# Synthetic Salesforce-style CRM schema
+# Raw Salesforce data ingested into Snowflake via Stitch.
+  
+
+ACCOUNT Table:
+  - ID
+  - NAME
+  - ACCOUNT_NUMBER
+  - TYPE
+  - INDUSTRY
+  - DESCRIPTION
+  - PARENT_ID
+  - OWNER_ID
+  - PHONE
+  - WEBSITE
+  - BILLING_STREET
+  - BILLING_CITY
+  - BILLING_STATE
+  - BILLING_POSTAL_CODE
+  - BILLING_COUNTRY
+  - SHIPPING_CITY
+  - SHIPPING_STATE
+  - SHIPPING_COUNTRY
+  - ANNUAL_REVENUE
+  - NUMBER_OF_EMPLOYEES
+  - RATING
+  - OWNERSHIP
+  - CREATED_DATE
+  - CREATED_BY_ID
+  - LAST_MODIFIED_DATE
+  - LAST_MODIFIED_BY_ID
+  - IS_DELETED
+  - _STITCH_EXTRACTED_AT
+  - _STITCH_LOADED_AT
+
