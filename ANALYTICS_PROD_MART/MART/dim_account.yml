@@ -1,0 +1,166 @@
+
+version: 2
+
+models:
+  - name: DIM_ACCOUNT
+    description: >
+      Customer account dimension built from transformed Salesforce CRM data.
+      Each row represents one unique Salesforce account, including account
+      attributes, parent account relationships, ownership information,
+      billing details, and revenue segmentation.
+
+    columns:
+      - name: ACCOUNT_SK
+        data_type: varchar
+        description: "Surrogate key generated from the Salesforce account identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: ACCOUNT_ID
+        data_type: varchar
+        description: "Unique Salesforce account identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: ACCOUNT_NAME
+        data_type: varchar
+        description: "Customer account name."
+
+      - name: ACCOUNT_NUMBER
+        data_type: varchar
+        description: "Salesforce account reference number."
+
+      - name: ACCOUNT_TYPE
+        data_type: varchar
+        description: "Classification of the customer account."
+
+      - name: INDUSTRY
+        data_type: varchar
+        description: "Industry associated with the customer account."
+
+      - name: ACCOUNT_DESCRIPTION
+        data_type: varchar
+        description: "Description of the customer account."
+
+      - name: PARENT_ACCOUNT_ID
+        data_type: varchar
+        description: "Identifier of the account's immediate parent."
+
+      - name: PARENT_ACCOUNT_NAME
+        data_type: varchar
+        description: "Name of the parent account, or the account itself if no parent exists."
+
+      - name: ACCOUNT_HIERARCHY_ID
+        data_type: varchar
+        description: "Immediate parent account identifier, defaulting to the current account ID."
+
+      - name: ACCOUNT_HIERARCHY_TYPE
+        data_type: varchar
+        description: "Identifies whether the account is a parent or child."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['PARENT', 'CHILD']
+
+      - name: OWNER_ID
+        data_type: varchar
+        description: "Salesforce user identifier of the account owner."
+
+      - name: OWNER_FIRST_NAME
+        data_type: varchar
+        description: "First name of the account owner."
+
+      - name: OWNER_LAST_NAME
+        data_type: varchar
+        description: "Last name of the account owner."
+
+      - name: OWNER_EMAIL
+        data_type: varchar
+        description: "Email address of the account owner."
+
+      - name: WEBSITE
+        data_type: varchar
+        description: "Customer company website."
+
+      - name: PHONE
+        data_type: varchar
+        description: "Standardized account phone number."
+
+      - name: BILLING_CITY
+        data_type: varchar
+        description: "Customer billing city."
+
+      - name: BILLING_STATE
+        data_type: varchar
+        description: "Customer billing state or province."
+
+      - name: BILLING_COUNTRY
+        data_type: varchar
+        description: "Standardized billing country code."
+        tests:
+          - accepted_values:
+              values: ['US', 'CA']
+
+      - name: SHIPPING_CITY
+        data_type: varchar
+        description: "Customer shipping city."
+
+      - name: SHIPPING_STATE
+        data_type: varchar
+        description: "Customer shipping state or province."
+
+      - name: SHIPPING_COUNTRY
+        data_type: varchar
+        description: "Customer shipping country."
+
+      - name: ANNUAL_REVENUE
+        data_type: number
+        description: "Reported annual revenue associated with the customer account."
+
+      - name: NUMBER_OF_EMPLOYEES
+        data_type: number
+        description: "Reported number of employees."
+
+      - name: ACCOUNT_RATING
+        data_type: varchar
+        description: "Salesforce account rating classification."
+
+      - name: OWNERSHIP
+        data_type: varchar
+        description: "Customer account ownership classification."
+
+      - name: CREATED_DATE
+        data_type: timestamp_ntz
+        description: "Timestamp when the Salesforce account was created."
+
+      - name: LAST_MODIFIED_DATE
+        data_type: timestamp_ntz
+        description: "Timestamp when the Salesforce account was last modified."
+
+      - name: REVENUE_SEGMENT
+        data_type: varchar
+        description: "Illustrative customer segment based on annual revenue."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['ENTERPRISE', 'MID_MARKET', 'SMB', 'UNKNOWN']
+
+      - name: IS_PARENT_ACCOUNT
+        data_type: boolean
+        description: "Indicates whether the account has no parent account."
+        tests:
+          - not_null
+
+      - name: DBT_UPDATED_AT
+        data_type: timestamp_ltz
+        description: "Timestamp when dbt last built the dimension table."
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ACCOUNT_ID
+            - ACCOUNT_SK
