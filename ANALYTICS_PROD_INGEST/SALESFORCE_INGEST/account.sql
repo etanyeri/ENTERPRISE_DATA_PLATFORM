@@ -1,0 +1,24 @@
+
+-- Synthetic Salesforce-style Account ingestion model
+-- Basic cleaning only
+
+SELECT
+      a.ID AS ACCOUNT_ID
+    , NULLIF(TRIM(a.NAME), '') AS ACCOUNT_NAME
+    , NULLIF(TRIM(a.ACCOUNT_NUMBER), '') AS ACCOUNT_NUMBER
+    , NULLIF(TRIM(a.TYPE), '') AS ACCOUNT_TYPE
+    , NULLIF(TRIM(a.INDUSTRY), '') AS INDUSTRY
+    , NULLIF(TRIM(a.PHONE), '') AS PHONE
+    , NULLIF(TRIM(a.WEBSITE), '') AS WEBSITE
+    , NULLIF(TRIM(a.BILLING_CITY), '') AS BILLING_CITY
+    , NULLIF(TRIM(a.BILLING_STATE), '') AS BILLING_STATE
+    , NULLIF(TRIM(a.BILLING_COUNTRY), '') AS BILLING_COUNTRY
+    , NULLIF(TRIM(a.OWNER_ID), '') AS OWNER_ID
+    , a.ANNUAL_REVENUE
+    , a.NUMBER_OF_EMPLOYEES
+    , a.CREATED_DATE
+    , a.LAST_MODIFIED_DATE
+    , a.IS_DELETED
+    , a.INGESTED_AT
+
+FROM {{ source('salesforce_raw', 'account') }} AS a
