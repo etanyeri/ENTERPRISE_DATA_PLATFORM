@@ -1,0 +1,15 @@
+
+SELECT
+      u.ID AS USER_ID
+    , NULLIF(TRIM(u.FIRST_NAME), '') AS FIRST_NAME
+    , NULLIF(TRIM(u.LAST_NAME), '') AS LAST_NAME
+    , NULLIF(TRIM(u.EMAIL), '') AS EMAIL
+    , NULLIF(TRIM(u.USERNAME), '') AS USERNAME
+    , NULLIF(TRIM(u.TITLE), '') AS TITLE
+    , NULLIF(TRIM(u.DEPARTMENT), '') AS DEPARTMENT
+    , u.MANAGER_ID
+    , u.IS_ACTIVE
+    , u.CREATED_DATE
+    , u.LAST_MODIFIED_DATE
+FROM {{ source('salesforce_raw', 'user') }} AS u
+  
