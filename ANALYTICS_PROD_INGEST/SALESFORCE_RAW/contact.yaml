@@ -1,0 +1,16 @@
+# Raw Salesforce data ingested into Snowflake via Stitch.
+# Illustrative field inventory — no live integration.
+
+CONTACT:
+  - ID
+  - ACCOUNT_ID
+  - FIRST_NAME
+  - LAST_NAME
+  - EMAIL
+  - PHONE
+  - TITLE
+  - DEPARTMENT
+  - OWNER_ID
+  - CREATED_DATE
+  - LAST_MODIFIED_DATE
+  - IS_DELETED
