@@ -16,7 +16,7 @@ WITH SUBSCRIPTION_BASE AS (
         , S.UNIT_PRICE
         , S.DISCOUNT_PERCENT
         , S.LAST_MODIFIED_DATE
-    FROM {{ source('billing_ingest', 'subscription') }} AS S
+    FROM {{ source('salesforce_ingest', 'subscription') }} AS S 
     WHERE COALESCE(S.IS_DELETED, FALSE) = FALSE
     QUALIFY ROW_NUMBER() OVER (
         PARTITION BY S.SUBSCRIPTION_ID
