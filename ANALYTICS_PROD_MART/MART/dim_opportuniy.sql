@@ -1,0 +1,18 @@
+
+SELECT
+      {{ dbt_utils.generate_surrogate_key(['OPPORTUNITY_ID']) }} AS OPPORTUNITY_KEY
+    , OPPORTUNITY_ID
+    , ACCOUNT_ID
+    , OPPORTUNITY_NAME
+    , STAGE_NAME
+    , AMOUNT
+    , PROBABILITY
+    , EXPECTED_REVENUE
+    , CLOSE_DATE
+    , IS_CLOSED
+    , IS_WON
+FROM {{ source('salesforce_ingest', 'opportunity') }}
+QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY OPPORTUNITY_ID
+    ORDER BY LAST_MODIFIED_DATE DESC NULLS LAST
+) = 1
