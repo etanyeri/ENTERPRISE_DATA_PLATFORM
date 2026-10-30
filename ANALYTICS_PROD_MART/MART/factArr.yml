@@ -1,0 +1,75 @@
+
+version: 2
+
+models:
+  - name: fact_arr
+    description: >
+      Monthly subscription revenue snapshot fact table.
+      Each row represents one subscription for one reporting month.
+      Includes dimensional keys, ARR, and calculated MRR.
+
+    columns:
+      - name: ARR_KEY
+        data_type: varchar
+        description: "Surrogate key for the reporting date and subscription."
+        tests:
+          - unique
+          - not_null
+
+      - name: REPORT_DATE
+        data_type: date
+        description: "Monthly revenue snapshot date."
+        tests:
+          - not_null
+
+      - name: ACCOUNT_KEY
+        data_type: varchar
+        description: "Surrogate key referencing DIM_ACCOUNT."
+        tests:
+          - not_null
+
+      - name: PRODUCT_KEY
+        data_type: varchar
+        description: "Surrogate key referencing DIM_PRODUCT."
+        tests:
+          - not_null
+
+      - name: SUBSCRIPTION_KEY
+        data_type: varchar
+        description: "Surrogate key referencing DIM_SUBSCRIPTION."
+        tests:
+          - not_null
+
+      - name: CONTRACT_KEY
+        data_type: varchar
+        description: "Surrogate key referencing DIM_CONTRACT."
+
+      - name: OPPORTUNITY_KEY
+        data_type: varchar
+        description: "Surrogate key referencing DIM_OPPORTUNITY."
+
+      - name: ARR_USD
+        data_type: number
+        description: "Annual recurring revenue in USD."
+
+      - name: ARR_LOCAL
+        data_type: number
+        description: "Annual recurring revenue in local currency."
+
+      - name: MRR_USD
+        data_type: number
+        description: "Monthly recurring revenue in USD, calculated as ARR divided by 12."
+
+      - name: MRR_LOCAL
+        data_type: number
+        description: "Monthly recurring revenue in local currency."
+
+      - name: LOCAL_CURRENCY
+        data_type: varchar
+        description: "ISO currency code for local revenue."
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - REPORT_DATE
+            - SUBSCRIPTION_ID
