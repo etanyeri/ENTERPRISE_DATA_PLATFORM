@@ -23,7 +23,8 @@ SELECT
         ELSE NULL
       END AS SFDC_PHONE_CLEANED
 
--- or , {{ standardize_phone('SFA.PHONE') }} AS SFDC_PHONE_CLEANED
+-- or use the created macro below
+      -- , {{ standardize_phone('SFA.PHONE') }} AS SFDC_PHONE_CLEANED
 
     , SFA.BILLING_CITY AS SFDC_BILLING_CITY
     , SFA.BILLING_STATE AS SFDC_BILLING_STATE
