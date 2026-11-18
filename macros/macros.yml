@@ -1,0 +1,13 @@
+version: 2
+
+macros:
+  - name: creating_database_macro
+    description: >
+      Project-specific database setup macro. Review the SQL definition to
+      document its exact behavior, required permissions, and arguments.
+
+  - name: standardize_phone
+    description: >
+      Project-specific phone-number standardization macro. Review the SQL
+      definition to document its input arguments, formatting rules, and
+      handling of null or invalid values.
