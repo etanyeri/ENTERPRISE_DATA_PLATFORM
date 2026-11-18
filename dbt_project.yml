@@ -1,0 +1,38 @@
+name: 'enterprise_data_platform'
+version: '1.0.0'
+config-version: 2
+
+# Must match the profile configured in dbt Cloud or local profiles.yml.
+profile: 'enterprise_data_platform'
+
+model-paths:
+  - 'ANALYTICS_PROD_INGEST'
+  - 'ANALYTICS_PROD_MART'
+macro-paths: ['macros']
+seed-paths: ['seeds']
+snapshot-paths: ['snapshots']
+test-paths: ['tests']
+analysis-paths: ['analyses']
+
+target-path: 'target'
+clean-targets:
+  - 'target'
+  - 'dbt_packages'
+
+models:
+  enterprise_data_platform:
+    ANALYTICS_PROD_INGEST:
+      +materialized: view
+      +tags: ['ingestion']
+    ANALYTICS_PROD_MART:
+      TRANSFORM:
+        +materialized: view
+        +tags: ['transform']
+      MART:
+        +materialized: table
+        +tags: ['mart']
+
+seeds:
+  enterprise_data_platform:
+    +schema: REFERENCE
+    +quote_columns: false
