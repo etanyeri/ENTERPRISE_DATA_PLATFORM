@@ -5,6 +5,14 @@ sources:
   - name: salesforce_raw
     database: ANALYTICS_PROD_INGEST
     schema: SALESFORCE_RAW
+    
+    config:
+      loaded_at_field: _loaddatetime
+      freshness:
+        error_after:
+          count: 2
+          period: hour
+          
     description: >
       Raw Salesforce CRM data ingested into Snowflake
       through Stitch. This public project uses
